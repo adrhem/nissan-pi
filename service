@@ -1,0 +1,11 @@
+[Unit]
+Description=Runs the service for read the tags
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python /home/pi/nissan-pi/main.py
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
