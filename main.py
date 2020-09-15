@@ -1,6 +1,17 @@
 #!/usr/bin/env python
+from dotenv import load_dotenv
+load_dotenv()
+
+import os
 import serial
 import time
+import requests
+
+api_url = os.getenv("API_URL")
+antenna_id = os.getenv("ANTENNA_ID")
+
+print api_url
+print antenna_id
 
 ser = serial.Serial(
   port='/dev/ttyUSB0',
@@ -18,5 +29,5 @@ while 1:
   tag = ser.read(ser.inWaiting()).replace("U","").replace("X","").strip()
   if tag != prev and tag != '':
     prev = tag
-    print tag
+    requests.post("%sstore", {'tag': tag_id, 'location': antenna_id})
   time.sleep(.01)
