@@ -29,5 +29,5 @@ while 1:
   tag = ser.read(ser.inWaiting()).replace("U","").replace("X","").strip()
   if tag != prev and tag != '':
     prev = tag
-    requests.post("%sstore", {'tag': tag_id, 'location': antenna_id})
+    requests.post("%sstore", {'tag': tag, 'location': antenna_id})
   time.sleep(.01)
