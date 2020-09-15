@@ -10,9 +10,6 @@ import requests
 api_url = os.getenv("API_URL")
 antenna_id = os.getenv("ANTENNA_ID")
 
-print api_url
-print antenna_id
-
 ser = serial.Serial(
   port='/dev/ttyUSB0',
   baudrate = 38400,
