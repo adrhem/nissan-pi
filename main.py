@@ -26,5 +26,7 @@ while 1:
   tag = ser.read(ser.inWaiting()).replace("U","").replace("X","").strip()
   if tag != prev and tag != '':
     prev = tag
-    requests.post("%sstore" % api_url, {'tag': tag, 'location': antenna_id})
+    url = "%slog" % api_url
+    data = {'tag': tag, 'location': antenna_id} 
+    res = requests.post(url, data)
   time.sleep(.01)
