@@ -1,6 +1,14 @@
 #!/usr/bin/env python
+from dotenv import load_dotenv
+load_dotenv()
+
+import os
 import serial
 import time
+import requests
+
+api_url = os.getenv("API_URL")
+antenna_id = os.getenv("ANTENNA_ID")
 
 ser = serial.Serial(
   port='/dev/ttyUSB0',
@@ -18,5 +26,7 @@ while 1:
   tag = ser.read(ser.inWaiting()).replace("U","").replace("X","").strip()
   if tag != prev and tag != '':
     prev = tag
-    print tag
+    url = "%slog" % api_url
+    data = {'tag': tag, 'location': antenna_id} 
+    res = requests.post(url, data)
   time.sleep(.01)
